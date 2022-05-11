@@ -3,7 +3,8 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useWeb3 } from '@3rdweb/hooks'
 import { client } from '../../lib/sanityClient'
-import { ThirdwebSDK } from '@3rdweb/sdk'
+// import { ThirdwebSDK } from '@3rdweb/sdk'
+import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import Header from '../../components/Header'
 import { CgWebsite } from 'react-icons/cg'
 import { AiOutlineInstagram, AiOutlineTwitter } from 'react-icons/ai'
@@ -50,7 +51,8 @@ const Collection = () => {
       provider.getSigner()
       
     )
-    return sdk.getNFTModule(collectionId)
+    // return sdk.getNFTModule(collectionId)
+    return sdk.getNFTDrop(collectionId)
   }, [provider])
 
   // get all NFTs in the collection
@@ -70,7 +72,8 @@ const Collection = () => {
       provider.getSigner()
    
     )
-    return sdk.getMarketplaceModule(
+    // return sdk.getMarketplaceModule(
+    return sdk.getMarketplace(
       // to the the marketplace module of the collection
       // the collectionId is the address of the marketplace module
       // go to thirdweb dashboard and get the address you will see it attached to the marketplace module
@@ -112,7 +115,8 @@ const Collection = () => {
   }, [collectionId])
 
   // console.log(router.query)
-  console.log(router.query.collectionId)
+  // console.log(router.query.collectionId)
+  console.log(nfts)
   return (
     <div className="overflow-hidden">
       <Header />

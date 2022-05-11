@@ -1,7 +1,8 @@
 import Header from '../../components/Header'
 import { useEffect, useMemo, useState } from 'react'
 import { useWeb3 } from '@3rdweb/hooks'
-import { ThirdwebSDK } from '@3rdweb/sdk'
+// import { ThirdwebSDK } from '@3rdweb/sdk'
+import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import { useRouter } from 'next/router'
 import NFTImage from '../../components/nft/NFTImage'
 import GeneralDetails from '../../components/nft/GeneralDetails'
@@ -29,7 +30,7 @@ const Nft = () => {
       provider.getSigner()
       
     )
-    return sdk.getNFTModule('0x62fea8Cd061cF1e85a9AFd1b93813e6e97d3B045')
+    return sdk.getNFTDrop('0x62fea8Cd061cF1e85a9AFd1b93813e6e97d3B045')
   }, [provider])
 
   // get all NFTs in the collection
@@ -38,7 +39,7 @@ const Nft = () => {
     ;(async () => {
       const nfts = await nftModule.getAll()
 
-      const selectedNftItem = nfts.find((nft) => nft.id === router.query.nftId)
+      const selectedNftItem = nfts.find((nft) => nft.metadata.name === router.query.nftId)
 
       setSelectedNft(selectedNftItem)
     })()
@@ -52,7 +53,7 @@ const Nft = () => {
     
     )
 
-    return sdk.getMarketplaceModule(
+    return sdk.getMarketplace(
       '0x9fe8ce791c2D849460ACE49b0f34eF35E233e219'
     )
   }, [provider])
